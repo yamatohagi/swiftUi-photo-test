@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3046E562883B1470007C896 /* SlideImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3046E552883B1470007C896 /* SlideImagePickerView.swift */; };
 		C35AA49728786940000CA3D1 /* PropupImagePickerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA49628786940000CA3D1 /* PropupImagePickerApp.swift */; };
 		C35AA49928786940000CA3D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA49828786940000CA3D1 /* ContentView.swift */; };
 		C35AA49B28786940000CA3D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35AA49A28786940000CA3D1 /* Assets.xcassets */; };
@@ -14,6 +15,9 @@
 		C35AA4A828786940000CA3D1 /* PropupImagePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA4A728786940000CA3D1 /* PropupImagePickerTests.swift */; };
 		C35AA4B228786940000CA3D1 /* PropupImagePickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA4B128786940000CA3D1 /* PropupImagePickerUITests.swift */; };
 		C35AA4B428786940000CA3D1 /* PropupImagePickerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA4B328786940000CA3D1 /* PropupImagePickerUITestsLaunchTests.swift */; };
+		C35AA4C5287869E7000CA3D1 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA4C4287869E7000CA3D1 /* ImageAsset.swift */; };
+		C35AA4C828786AC2000CA3D1 /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA4C728786AC2000CA3D1 /* ImagePickerViewModel.swift */; };
+		C35AA4CA287871E5000CA3D1 /* PopupImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35AA4C9287871E5000CA3D1 /* PopupImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C3046E552883B1470007C896 /* SlideImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideImagePickerView.swift; sourceTree = "<group>"; };
 		C35AA49328786940000CA3D1 /* PropupImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropupImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35AA49628786940000CA3D1 /* PropupImagePickerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropupImagePickerApp.swift; sourceTree = "<group>"; };
 		C35AA49828786940000CA3D1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +49,10 @@
 		C35AA4AD28786940000CA3D1 /* PropupImagePickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PropupImagePickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35AA4B128786940000CA3D1 /* PropupImagePickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropupImagePickerUITests.swift; sourceTree = "<group>"; };
 		C35AA4B328786940000CA3D1 /* PropupImagePickerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropupImagePickerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C35AA4C4287869E7000CA3D1 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
+		C35AA4C728786AC2000CA3D1 /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
+		C35AA4C9287871E5000CA3D1 /* PopupImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupImagePickerView.swift; sourceTree = "<group>"; };
+		C35AA4CB28787979000CA3D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +103,10 @@
 		C35AA49528786940000CA3D1 /* PropupImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				C35AA4CB28787979000CA3D1 /* Info.plist */,
+				C35AA4C628786A97000CA3D1 /* ViewModel */,
+				C35AA4C12878697A000CA3D1 /* Model */,
+				C35AA4C028786963000CA3D1 /* View */,
 				C35AA49628786940000CA3D1 /* PropupImagePickerApp.swift */,
 				C35AA49828786940000CA3D1 /* ContentView.swift */,
 				C35AA49A28786940000CA3D1 /* Assets.xcassets */,
@@ -125,6 +138,31 @@
 				C35AA4B328786940000CA3D1 /* PropupImagePickerUITestsLaunchTests.swift */,
 			);
 			path = PropupImagePickerUITests;
+			sourceTree = "<group>";
+		};
+		C35AA4C028786963000CA3D1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C35AA4C9287871E5000CA3D1 /* PopupImagePickerView.swift */,
+				C3046E552883B1470007C896 /* SlideImagePickerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C35AA4C12878697A000CA3D1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C35AA4C4287869E7000CA3D1 /* ImageAsset.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C35AA4C628786A97000CA3D1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C35AA4C728786AC2000CA3D1 /* ImagePickerViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +295,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C35AA4C5287869E7000CA3D1 /* ImageAsset.swift in Sources */,
 				C35AA49928786940000CA3D1 /* ContentView.swift in Sources */,
+				C3046E562883B1470007C896 /* SlideImagePickerView.swift in Sources */,
+				C35AA4CA287871E5000CA3D1 /* PopupImagePickerView.swift in Sources */,
+				C35AA4C828786AC2000CA3D1 /* ImagePickerViewModel.swift in Sources */,
 				C35AA49728786940000CA3D1 /* PropupImagePickerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,8 +459,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PropupImagePicker/Preview Content\"";
+				DEVELOPMENT_TEAM = MMHQKV6899;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PropupImagePicker/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真を承認する";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -445,8 +490,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PropupImagePicker/Preview Content\"";
+				DEVELOPMENT_TEAM = MMHQKV6899;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PropupImagePicker/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真を承認する";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

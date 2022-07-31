@@ -12,40 +12,30 @@ import Photos
 struct SlideImagePickerView: View {
     
     @StateObject var imagePickerModel = ImagePickerViewModel()
-
+    
     @GestureState private var dragOffset: CGFloat = 0
     
     let itemPadding: CGFloat = 30
     
-
     
     var body: some View {
-  
+        
         Button("更新") {
             self.imagePickerModel.update()
-    
+            
         }
         Button("削除") {
             self.imagePickerModel.delete()
-    
+            
         }
         
         GeometryReader { bodyView in
             LazyHStack(spacing: itemPadding) {
-                
                 let fetchedImagesAry = $imagePickerModel.fetchedImages
+         
                 
-                
-                
-                
-                
-  
                 ForEach(fetchedImagesAry) { $imageAsset in
-                    
-//                    let _ = print("fetchedImagesAry.count\(fetchedImagesAry.count)")
-
-          
-           
+    
                     // カルーセル対象のView
                     SlideContent(imageAsset: imageAsset)
                         .offset(x: self.dragOffset)
@@ -56,7 +46,7 @@ struct SlideImagePickerView: View {
                                     // 先頭・末尾ではスクロールする必要がないので、画面サイズの1/5までドラッグで制御する
                                     if self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)! == 0, value.translation.width > 0 {
                                         state = value.translation.width / 5
-//                                        let _ = print(self.dragOffset)
+                                        //                                        let _ = print(self.dragOffset)
                                     } else if self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)! == (fetchedImagesAry.count - 1), value.translation.width < 0 {
                                         state = value.translation.width / 5
                                     } else {
@@ -66,23 +56,20 @@ struct SlideImagePickerView: View {
                                 .onEnded({ value in
                                     var newIndex = self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)!
                                     // ドラッグ幅からページングを判定
+                                                                        
+                                    var now_ary_index =  self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)!
                                     
                                     
-                                        var now_ary_index =  self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)!
-                                        
-                                   
-                                         
                                     if abs(value.translation.width) > bodyView.size.width * 0.1 {
                                         newIndex = value.translation.width > 0 ? now_ary_index - 1 : now_ary_index + 1
-                              
+                                        
                                     }
                                     // 最小ページ、最大ページを超えないようチェック
                                     if newIndex < 0 {
                                         newIndex = 0
                                     } else if newIndex > (fetchedImagesAry.count - 1) {
                                         newIndex = fetchedImagesAry.count - 1
-                                    
-                                     
+                                        
                                     }
                                     self.imagePickerModel.currentKey = self.imagePickerModel.currentAry[newIndex]
                                     
@@ -90,7 +77,7 @@ struct SlideImagePickerView: View {
                                     let _ = print("self.imagePickerModel.currentIndex\(self.imagePickerModel.currentIndex)")
                                     let _ = print(self.imagePickerModel.currentKey)
                                     let _ = print(self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey))
-                       
+                                    
                                 })
                         )
                         .onAppear() {
@@ -100,7 +87,7 @@ struct SlideImagePickerView: View {
                                 // MARK: Fetching Thumbnail Image
                                 let manager = PHCachingImageManager.default()
                                 manager.requestImage(for: imageAsset.asset, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFill, options: nil) { image,
-
+                                    
                                     _ in
                                     imageAsset.thumbnail = image
                                 }
@@ -112,7 +99,7 @@ struct SlideImagePickerView: View {
                         .background(Color.gray)
                     //                    .padding(.leading, index == 0 ? bodyView.size.width * 0 : 0)
                 }
-             
+                
             }
             
         }
@@ -121,9 +108,9 @@ struct SlideImagePickerView: View {
     
     func SlideContent(imageAsset: ImageAsset)->some View{
         GeometryReader{ proxy in
-            let size = proxy.size            
+            let size = proxy.size
             
-
+            
             if let thumbnail = imageAsset.thumbnail{
                 Image(uiImage: thumbnail)
                     .resizable()
@@ -131,9 +118,9 @@ struct SlideImagePickerView: View {
                     .frame(width: size.width, height: size.height)
                     .clipShape(RoundedRectangle(cornerRadius: 0, style: .continuous))
             }else{
-                
-                ProgressView()
-                    .frame(width: size.width, height: size.height,alignment: .center)
+                Text("HDD")
+//                ProgressView()
+//                    .frame(width: size.width, height: size.height,alignment: .center)
             }
             
         }

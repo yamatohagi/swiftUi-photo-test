@@ -4,10 +4,8 @@
 //
 //  Created by yamato hagi on 2022/07/08.
 //
-
 import SwiftUI
 import PhotosUI
-
 
 
 class ImagePickerViewModel: NSObject, ObservableObject {
@@ -29,9 +27,7 @@ class ImagePickerViewModel: NSObject, ObservableObject {
         self.fetchedImages = beforeAry
         PHPhotoLibrary.shared().register(self)
         
-        
     }
-    
     
     public func update(){
         self.currentIndex = 1
@@ -60,12 +56,8 @@ class ImagePickerViewModel: NSObject, ObservableObject {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 
         self.fetchResult = PHAsset.fetchAssets(with: .image,options: options)
-        
-        
-        
-        
+                       
         self.fetchResult?.enumerateObjects{ asset, index, _ in
-            
        
        
             var imageAssset: ImageAsset = .init(asset: asset)
@@ -168,17 +160,6 @@ extension ImagePickerViewModel: PHPhotoLibraryChangeObserver {
                     if let changed = changeDetails.changedIndexes, !changed.isEmpty {
                         print("changed\(changed)")
                     }
-                    
-                    
-                    //                    if let inserted = changeDetails.insertedIndexes {
-                    //                        print("insert")
-                    //                        print((changeDetails.index))
-                    //                    }
-                    //                    if let removed = changeDetails.removedIndexes {
-                    //                        print("remo")
-                    //                        print((changeDetails.index))
-                    //                        print((removed))
-                    //                    }
                 }
                 self.currentAry = []
                 let newFetchResul = changeDetails.fetchResultAfterChanges
@@ -189,14 +170,6 @@ extension ImagePickerViewModel: PHPhotoLibraryChangeObserver {
   
                     ary.append(imageAssset)
                 }
-                
-//
-//                for i in (0 ..< ary.count){
-//                    PHCachingImageManager.default().requestImage(for: ary[i].asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: nil) { image,
-//                        _ in
-//                        ary[i].thumbnail = image
-//                    }
-//                }
                 self.fetchedImages = ary
                 print("aaa変更後")
                 let _ = print(self.currentAry)
@@ -204,13 +177,4 @@ extension ImagePickerViewModel: PHPhotoLibraryChangeObserver {
             }
         })
     }
-    
-    //  func photoLibraryDidChange(_ changeInstance: PHChange) {
-    //      photoLibraryDidChange()
-    //      if let fetchResult = self.fetchResult, let changeDetails = changeInstance.changeDetails(for:fetchResult) {
-    //                  let fetchResult = changeDetails.fetchResultAfterChanges
-    //              }
-    //      print("フォトライブラリに何らかの変更がありました")
-    //
-    //  }
 }

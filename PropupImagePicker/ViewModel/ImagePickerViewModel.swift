@@ -54,10 +54,10 @@ class ImagePickerViewModel: NSObject, ObservableObject {
         var ary:[ImageAsset] = []
         let options = PHFetchOptions()
         // MARK: Modify As Per Your Wish
-        options.fetchLimit = 1
+        options.fetchLimit = 100
         options.includeHiddenAssets = false
         options.includeAssetSourceTypes = [.typeUserLibrary]
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 
         self.fetchResult = PHAsset.fetchAssets(with: .image,options: options)
         

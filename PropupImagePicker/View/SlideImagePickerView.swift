@@ -95,9 +95,12 @@ struct SlideImagePickerView: View {
                         )
                         .onAppear() {
                             if imageAsset.thumbnail == nil{
+                                let options = PHImageRequestOptions()
+                                options.deliveryMode = .opportunistic
                                 // MARK: Fetching Thumbnail Image
                                 let manager = PHCachingImageManager.default()
-                                manager.requestImage(for: imageAsset.asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil) { image,
+                                manager.requestImage(for: imageAsset.asset, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFill, options: nil) { image,
+
                                     _ in
                                     imageAsset.thumbnail = image
                                 }
@@ -118,7 +121,8 @@ struct SlideImagePickerView: View {
     
     func SlideContent(imageAsset: ImageAsset)->some View{
         GeometryReader{ proxy in
-            let size = proxy.size
+            let size = proxy.size            
+            
 
             if let thumbnail = imageAsset.thumbnail{
                 Image(uiImage: thumbnail)
@@ -127,6 +131,7 @@ struct SlideImagePickerView: View {
                     .frame(width: size.width, height: size.height)
                     .clipShape(RoundedRectangle(cornerRadius: 0, style: .continuous))
             }else{
+                
                 ProgressView()
                     .frame(width: size.width, height: size.height,alignment: .center)
             }

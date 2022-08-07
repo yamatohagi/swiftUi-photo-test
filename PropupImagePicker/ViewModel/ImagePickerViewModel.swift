@@ -39,7 +39,7 @@ class ImagePickerViewModel: NSObject, ObservableObject {
     
     public func delete(){
         fetchedImages = []
-        fetchImages()
+
         fetchedImages.remove(at: 0)
         print("あああaaaaaaaaaーーーーーーーーーーーーー")
         print(fetchedImages.count)
@@ -60,8 +60,8 @@ class ImagePickerViewModel: NSObject, ObservableObject {
         self.fetchResult?.enumerateObjects{ asset, index, _ in
        
        
-            var imageAssset: ImageAsset = .init(asset: asset)
-            let options = PHImageRequestOptions()
+            let imageAssset: ImageAsset = .init(asset: asset)
+            _ = PHImageRequestOptions()
             
       
 //            if imageAssset.thumbnail == nil{

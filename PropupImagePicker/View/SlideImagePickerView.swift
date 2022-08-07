@@ -32,32 +32,32 @@ struct SlideImagePickerView: View {
         GeometryReader { bodyView in
             LazyHStack(spacing: itemPadding) {
                 let fetchedImagesAry = $imagePickerModel.fetchedImages
-         
+                
                 
                 ForEach(fetchedImagesAry) { $imageAsset in
-    
+                    
                     // カルーセル対象のView
                     SlideContent(imageAsset: imageAsset)
                         .offset(x: self.dragOffset)
-                        .offset(x: -CGFloat(self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)!) * (bodyView.size.width * 1 + itemPadding))
+                        .offset(x: -CGFloat(self.imagePickerModel.currentAry.firstIndex(of: self.imagePickerModel.currentKey)!) * (bodyView.size.width * 1 + itemPadding))
                         .gesture(
                             DragGesture()
                                 .updating(self.$dragOffset, body: { (value, state, _) in
                                     // 先頭・末尾ではスクロールする必要がないので、画面サイズの1/5までドラッグで制御する
-                                    if self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)! == 0, value.translation.width > 0 {
+                                    if self.imagePickerModel.currentAry.firstIndex(of: self.imagePickerModel.currentKey)! == 0, value.translation.width > 0 {
                                         state = value.translation.width / 5
                                         //                                        let _ = print(self.dragOffset)
-                                    } else if self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)! == (fetchedImagesAry.count - 1), value.translation.width < 0 {
+                                    } else if self.imagePickerModel.currentAry.firstIndex(of: self.imagePickerModel.currentKey)! == (fetchedImagesAry.count - 1), value.translation.width < 0 {
                                         state = value.translation.width / 5
                                     } else {
                                         state = value.translation.width
                                     }
                                 })
                                 .onEnded({ value in
-                                    var newIndex = self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)!
+                                    var newIndex = self.imagePickerModel.currentAry.firstIndex(of: self.imagePickerModel.currentKey)!
                                     // ドラッグ幅からページングを判定
-                                                                        
-                                    var now_ary_index =  self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)!
+                                    
+                                    let now_ary_index =  self.imagePickerModel.currentAry.firstIndex(of: self.imagePickerModel.currentKey)!
                                     
                                     
                                     if abs(value.translation.width) > bodyView.size.width * 0.1 {
@@ -73,20 +73,21 @@ struct SlideImagePickerView: View {
                                     }
                                     self.imagePickerModel.currentKey = self.imagePickerModel.currentAry[newIndex]
                                     
-                                    self.imagePickerModel.currentIndex = self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey)!
+                                    self.imagePickerModel.currentIndex = self.imagePickerModel.currentAry.firstIndex(of: self.imagePickerModel.currentKey)!
                                     let _ = print("self.imagePickerModel.currentIndex\(self.imagePickerModel.currentIndex)")
                                     let _ = print(self.imagePickerModel.currentKey)
-                                    let _ = print(self.imagePickerModel.currentAry.index(of: self.imagePickerModel.currentKey))
+                                    let _ = print(self.imagePickerModel.currentAry.firstIndex(of: self.imagePickerModel.currentKey)!)
                                     
                                 })
                         )
                         .onAppear() {
                             if imageAsset.thumbnail == nil{
                                 let options = PHImageRequestOptions()
+                                options.isNetworkAccessAllowed = true
                                 options.deliveryMode = .opportunistic
                                 // MARK: Fetching Thumbnail Image
                                 let manager = PHCachingImageManager.default()
-                                manager.requestImage(for: imageAsset.asset, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFill, options: nil) { image,
+                                manager.requestImage(for: imageAsset.asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil) { image,
                                     
                                     _ in
                                     imageAsset.thumbnail = image
@@ -119,8 +120,8 @@ struct SlideImagePickerView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 0, style: .continuous))
             }else{
                 Text("HDD")
-//                ProgressView()
-//                    .frame(width: size.width, height: size.height,alignment: .center)
+                //                ProgressView()
+                //                    .frame(width: size.width, height: size.height,alignment: .center)
             }
             
         }

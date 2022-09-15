@@ -14,6 +14,7 @@ struct SlideImagePickerView: View {
     @StateObject var imagePickerModel = ImagePickerViewModel()
     
     @GestureState private var dragOffset: CGFloat = 0
+    weak var progressView: UIProgressView!
     
     let itemPadding: CGFloat = 30
     
@@ -86,10 +87,23 @@ struct SlideImagePickerView: View {
                                 options.isNetworkAccessAllowed = true
                                 options.deliveryMode = .opportunistic
                                 // MARK: Fetching Thumbnail Image
+                                
+                                options.progressHandler = { progress, _, _, _ in
+                                    //ハンドラはバックグラウンドキューで発生する可能性があります。
+                                    // UI作業のためにメインキューに再ディスパッチします。
+                                    DispatchQueue.main.sync {
+                                        self.progressView.progress = Float(progress)
+                                    }
+                                }
+                                
                                 let manager = PHCachingImageManager.default()
                                 manager.requestImage(for: imageAsset.asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil) { image,
-                                    
                                     _ in
+                                    // PhotoKitは要求を完了し、進行状況表示を非表示にします。
+                                    if (self.progressView != nil) {
+                                        self.progressView.isHidden = true
+                                    }
+                                   
                                     imageAsset.thumbnail = image
                                 }
                             }
